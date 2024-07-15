@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Message Encryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Secure Message Encryption</h2>
+        
+        <form id="encryptionForm" action="/encrypt" method="post">
+
+            <label for="message">Enter your message:</label>
+            <input type="text" id="message" name="message" required>
+
+            <label for="key">Enter a key:</label>
+            <input type="text" id="key" name="key" required>
+
+            <label for="encryptionMethod">Choose an encryption method:</label>
+            <select id="encryptionMethod" name="encryptionMethod" required>
+                <option value="" disabled selected>Select an encryption method</option>
+                <option value="symmetric">Symmetric</option>
+                <option value="asymmetric">Asymmetric</option>
+            </select>
+
+            <div id="symmetricOptions" style="display: none;">
+                <label for="symmetricMethod">Choose a symmetric method:</label>
+                <select id="symmetricMethod" name="symmetricMethod">
+                    <option value="AES">AES</option>
+                    <option value="SHA256">SHA256</option>
+                </select>
+            </div>
+
+            <div id="asymmetricOptions" style="display: none;">
+                <label for="asymmetricMethod">Choose an asymmetric method:</label>
+                <select id="asymmetricMethod" name="asymmetricMethod">
+                    <option value="RSA">RSA</option>
+                </select>
+            </div>
+
+            <button type="submit">Encrypt</button>
+        </form>
+    </div>
+
+    <script>
+        const encryptionForm = document.getElementById("encryptionForm");
+        const encryptionMethod = document.getElementById("encryptionMethod");
+        const symmetricOptions = document.getElementById("symmetricOptions");
+        const asymmetricOptions = document.getElementById("asymmetricOptions");
+
+        encryptionMethod.addEventListener("change", function () {
+            if (encryptionMethod.value === "symmetric") {
+                symmetricOptions.style.display = "block";
+                asymmetricOptions.style.display = "none";
+            } else if (encryptionMethod.value === "asymmetric") {
+                symmetricOptions.style.display = "none";
+                asymmetricOptions.style.display = "block";
+            } else {
+                symmetricOptions.style.display = "none";
+                asymmetricOptions.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
